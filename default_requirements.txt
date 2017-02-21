@@ -1,0 +1,7 @@
+cffi==1.9.1
+Django==1.10.5
+future==0.16.0
+olefile==0.44
+Pillow==4.0.0
+pycparser==2.17
+six==1.10.0
