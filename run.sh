@@ -1,8 +1,11 @@
 # Check if repo url exists.
 : "${TESTS_REPO_URL:?Repository URL was not provided. Exiting...}"
 
-# Clone the repo from the environment variable.
+# Define helpful variables
 ROOT=./repo
+TESTS_DIR=./tests
+
+# Clone the repo from the environment variable.
 printf ":: Cloning $TESTS_REPO_URL to $ROOT\n"
 git clone $TESTS_REPO_URL $ROOT
 
@@ -26,7 +29,7 @@ printf "\n:: Application root found in $ROOT\n"
 # Copy our tests in.
 printf "\n:: Copying tests into $ROOT/rango/tests/\n"
 mkdir $ROOT/rango/tests
-cp ./tests/*.py $ROOT/rango/tests/
+cp $TESTS_DIR/*.py $ROOT/rango/tests/
 
 # Install python requirements.
 if [ ! -f ./repo/requirements.txt ]; then
@@ -38,5 +41,5 @@ else
 fi
 
 # Run testing script.
-printf "\n:: Running test runner\n"
-python ./test.py
+printf "\n"
+REPO_ROOT=$ROOT TESTS_DIR=$TESTS_DIR python ./test.py

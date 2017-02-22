@@ -1,11 +1,21 @@
+import subprocess 
+import os
 from os import listdir
 from os.path import isfile, join
 
-TESTS_PATH = './tests/'
+REPO_PATH = os.environ['REPO_ROOT']
+TESTS_PATH = os.environ['TESTS_DIR']
 MODULE = 'rango.tests.'
 
 def run():
-    print(find_tests())
+    tests = find_tests()
+
+    for test in tests:
+        print(':: Running tests from ' + test['file_name'])
+        process = subprocess.run(['python', REPO_PATH + '/manage.py', 'test', test['module']],
+                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        test['log'] = process.stdout
+        print(':: Finished running tests from ' + test['file_name'] + '\n') 
 
 def find_tests():
     contents_of_folder = [f for f in listdir(TESTS_PATH)]
