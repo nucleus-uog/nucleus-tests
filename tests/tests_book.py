@@ -176,7 +176,7 @@ class Chapter5ViewTests(TestCase):
     # check admin interface - is it configured and set up
 
     def test_admin_interface_page_view(self):
-        from .admin import PageAdmin
+        from ..admin import PageAdmin
         self.assertIn('category', PageAdmin.list_display)
         self.assertIn('url', PageAdmin.list_display)
 
