@@ -120,7 +120,6 @@ class Chapter9ViewTests(TestCase):
             except:
                 return False
 
-        print(response.content)
         try:
             self.assertIn(b'wronguser', response.content)
         except:
