@@ -44,7 +44,7 @@ cp ./modules/runner.py $ROOT/tango_with_django_project/runner.py
 # Install python requirements.
 if [ ! -f ./repo/requirements.txt ]; then
 	printf "\n:: Using default requirements, none supplied by project.\n"
-	pip install -r default-requirements.txt
+	pip install -r default_requirements.txt
 else
 	printf "\n:: Installing project requirements from requirements.txt\n"
 	pip install -r ./repo/requirements.txt
