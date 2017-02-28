@@ -1,29 +1,32 @@
 # Nucleus Tests
 [![build status](https://gitlab.com/devine-industries/nucleus-tests/badges/master/build.svg)](https://gitlab.com/devine-industries/nucleus-tests/commits/master)
 [![coverage report](https://gitlab.com/devine-industries/nucleus-tests/badges/master/coverage.svg)](https://gitlab.com/devine-industries/nucleus-tests/commits/master)
+
 This project contains the tests used within the primary Nucleus application. It is intended to be distributed as a docker container and run in a job queue for students.
 
 ## Status
 The status of this project can be checked in the task list below.
 - [x] Docker Container
 - [x] Results Output
-- [] Finalized Tests
-- [] Integrate `test.py` into `run.sh`
+- [ ] Finalized Tests
+- [ ] Integrate `test.py` into `run.sh`
 
 ## How to use
 ### Docker (reccomended)
 You can run the testing application using Docker by running the following command:
 ```sh
-docker run \
-  --name nucleus-tests \
-  -e TESTS_REPO_URL=<REPO_URL> \
-  -e TESTS_STUDENT=<STUDENT_EMAIL> \
-  -v </path/to/results>:/nucleus/results \
-  registry.gitlab.com/devine-industries/nucleus-tests:latest
+$ docker run \
+   --name nucleus-tests \
+   -e TESTS_REPO_URL=<REPO_URL> \
+   -e TESTS_STUDENT=<STUDENT_EMAIL> \
+   -v </path/to/results>:/nucleus/results \
+   registry.gitlab.com/devine-industries/nucleus-tests:latest
 ```
 You should replace `TESTS_REPO_URL` with the clone url that should be supplied to `git clone` and `TESTS_STUDENT` with the email address of the student that is being tested.
 
 The container will output the results to a `results.json` file in the `/path/to/results` directory supplied. When running, you should replace `/path/to/results/` with the path you would like the output to be in - for Windows machines, this will be in the format `//c/Users/David/Projects/wad2/results` or similar.
+
+To install Docker to your system, follow the guides on the [Docker website](https://www.docker.com/products/overview). Windows users without Hyper-V will need to run the unsupported Docker Toolbox rather than the new Docker for Windows - the tests should still work.
 ### Manual
 If you opt to run the tests manually, you can clone this repository and run the following commands:
 ```sh
