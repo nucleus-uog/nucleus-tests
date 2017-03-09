@@ -4,10 +4,11 @@ from subprocess import Popen
 from os import listdir
 from os.path import isfile, join
 
-REPO_PATH = os.environ['REPO_ROOT']
+TESTS_REPO = os.environ['REPO_ROOT']
+TESTS_VERSION = os.environ['TESTS_VERSION']
 TESTS_PATH = os.environ['TESTS_DIR']
-STUDENT_EMAIL = os.environ['STUDENT_EMAIL']
-MANAGE_PATH = REPO_PATH + '/manage.py'
+TESTS_STUDENT = os.environ['TESTS_STUDENT']
+MANAGE_PATH = TESTS_REPO + '/manage.py'
 
 def run():
     # Find the tests.
@@ -15,7 +16,8 @@ def run():
 
     env = os.environ.copy()
     env['DJANGO_SETTINGS_MODULE'] = 'tango_with_django_project.test_settings'
-    env['STUDENT_EMAIL'] = STUDENT_EMAIL
+    env['TESTS_STUDENT'] = TESTS_STUDENT
+    env['TESTS_VERSION'] = TESTS_VERSION
     # Run the tests.
     for test in tests:
         print(':: Running tests from ' + test['file_name'])

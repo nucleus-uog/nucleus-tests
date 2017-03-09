@@ -4,12 +4,8 @@
 
 This project contains the tests used within the primary Nucleus application. It is intended to be distributed as a docker container and run in a job queue for students.
 
-## Status
-The status of this project can be checked in the task list below.
-- [x] Docker Container
-- [x] Results Output
-- [ ] Finalized Tests
-- [ ] Integrate `test.py` into `run.sh`
+## Making a change?
+When updating this repository with changes to the tests, be sure to update the `run.sh` `TESTS_VERSION` variable so that this change is reflected in the Nucleus application.
 
 ## How to use
 ### Docker (reccomended)

@@ -6,7 +6,10 @@ from os.path import join, exists, isfile
 from copy import deepcopy
 from django.test.runner import DiscoverRunner
 
-STUDENT_EMAIL = os.environ['STUDENT_EMAIL']
+
+TESTS_STUDENT = os.environ['TESTS_STUDENT']
+TESTS_VERSION = os.environ['TESTS_VERSION']
+
 
 class NucleusRunner(DiscoverRunner):
 
@@ -23,14 +26,15 @@ class NucleusRunner(DiscoverRunner):
     def output_results(self, test_results):
         base_output_directory = join(os.getcwd(), 'results')
         student_output_directory = join(base_output_directory,
-                                        STUDENT_EMAIL)
+                                        TESTS_STUDENT)
 
         self.mkdir_if_not_exists(base_output_directory)
         self.mkdir_if_not_exists(student_output_directory)
 
         output_file = join(student_output_directory, 'results.json')
         output = {
-            'student': STUDENT_EMAIL,
+            'student': TESTS_STUDENT,
+            'version': TESTS_VERSION,
             'tests': []
         }
         results = {}

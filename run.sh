@@ -2,6 +2,9 @@
 : "${TESTS_REPO_URL:?Repository URL was not provided. Exiting...}"
 : "${TESTS_STUDENT:?Student email was not provided. Exiting...}"
 
+# Set the tests version variable, keep this up to date.
+export TESTS_VERSION='0.1a'
+
 # Define helpful variables
 ROOT=./repo
 TESTS_DIR=./tests
@@ -52,4 +55,4 @@ fi
 
 # Run testing script.
 printf "\n"
-REPO_ROOT=$ROOT PROJECT_ROOT=$PROJECT TESTS_DIR=$TESTS_DIR STUDENT_EMAIL=$TESTS_STUDENT python ./test.py
+REPO_ROOT=$ROOT PROJECT_ROOT=$PROJECT TESTS_DIR=$TESTS_DIR python ./test.py
