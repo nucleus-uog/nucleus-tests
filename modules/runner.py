@@ -63,7 +63,7 @@ class NucleusRunner(DiscoverRunner):
                 
                 results[str(test)].update({
                     'passed': False,
-                    'error': './' + error_filename
+                    'error': error_filename
                 })
             return results
 
