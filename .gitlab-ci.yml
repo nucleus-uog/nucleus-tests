@@ -2,11 +2,13 @@ image: docker
 services:
   - docker:dind
 variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
+  BRANCH_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  LATEST_TAG: $CI_REGISTRY_IMAGE:latest
 before_script:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 build:
   stage: build
   script:
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+    - docker build -t $BRANCH_TAG -t $LATEST_TAG .
+    - docker push $BRANCH_TAG
+    - if [ "$CI_BUILD_REF_NAME" == "master" ]; then 'docker push $LATEST_TAG'; fi
