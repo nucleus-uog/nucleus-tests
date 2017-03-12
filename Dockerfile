@@ -6,6 +6,6 @@ WORKDIR /nucleus
 ADD . /nucleus/
 
 RUN apk update
-RUN apk add git bash
+RUN apk add git alpine-sdk bash
 
 ENTRYPOINT ["/bin/bash", "/nucleus/run.sh"]
