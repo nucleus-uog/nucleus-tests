@@ -6,6 +6,6 @@ WORKDIR /nucleus
 ADD . /nucleus/
 
 RUN apk update
-RUN apk add git bash libffi libffi-dev build-base
+RUN apk add git bash libffi libffi-dev build-base zlib zlib-dev
 
 ENTRYPOINT ["/bin/bash", "/nucleus/run.sh"]
