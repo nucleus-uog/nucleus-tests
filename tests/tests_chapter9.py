@@ -188,14 +188,14 @@ class Chapter9ViewTests(TestCase):
             except:
                 return False
 
+        project_root = os.environ['ROOT']
+
         # Check user was successfully registered
         self.assertIn('thank you for registering!'.lower(), response.content.lower())
         user = User.objects.get(username='testuser')
         user_profile = UserProfile.objects.get(user=user)
-        path_to_image = './media/profile_images/testuser.jpg'
+        path_to_image = os.path.join(os.getcwd(), project_root[2:], 'media/profile_images/testuser.jpg')
 
         # Check file was saved properly
         self.assertTrue(os.path.isfile(path_to_image))
 
-        # Delete fake file created
-        default_storage.delete('./media/profile_images/testuser.jpg')

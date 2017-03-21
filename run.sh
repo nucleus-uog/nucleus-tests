@@ -60,4 +60,5 @@ fi
 # Run testing script.
 printf "\n"
 export DJANGO_SETTINGS_MODULE=tango_with_django_project.test_settings
+export ROOT=$ROOT
 python $ROOT/manage.py test $ROOT/rango/
