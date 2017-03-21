@@ -3,7 +3,10 @@
 : "${TESTS_STUDENT:?Student email was not provided. Exiting...}"
 
 # Set the tests version variable, keep this up to date.
-export TESTS_VERSION='0.1a'
+export TESTS_VERSION='0.2'
+
+# Print Python version
+python -V
 
 # Define helpful variables
 ROOT=./repo
@@ -36,8 +39,9 @@ printf "\n:: Application root found in $ROOT\n"
 
 # Copy our tests in.
 printf "\n:: Copying tests into $ROOT/rango/tests/\n"
-mkdir $ROOT/rango/tests
-cp $TESTS_DIR/*.py $ROOT/rango/tests/
+mkdir $ROOT/rango/nucleus_tests
+cp $TESTS_DIR/*.py $ROOT/rango/nucleus_tests/
+cp $TESTS_DIR/decorators.py $ROOT/rango/
 
 # Copy our test runner in.
 printf "\n:: Copying custom test runner into $ROOT\n"
@@ -55,4 +59,5 @@ fi
 
 # Run testing script.
 printf "\n"
-REPO_ROOT=$ROOT PROJECT_ROOT=$PROJECT TESTS_DIR=$TESTS_DIR python ./test.py
+export DJANGO_SETTINGS_MODULE=tango_with_django_project.test_settings
+python $ROOT/manage.py test $ROOT/rango/

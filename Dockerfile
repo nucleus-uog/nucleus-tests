@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:2.7-alpine
 MAINTAINER Devine Industries
 
 RUN mkdir /nucleus
@@ -6,7 +6,7 @@ WORKDIR /nucleus
 ADD . /nucleus/
 
 RUN apk update
-RUN apk add git bash 
+RUN apk add git bash
 # pip install requirements.
 RUN apk add libffi libffi-dev build-base
 # Pillow Dependencies

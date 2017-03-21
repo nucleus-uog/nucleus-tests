@@ -1,4 +1,3 @@
-from past.builtins import xrange
 # Chapter 3
 from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -11,19 +10,19 @@ from django.contrib.staticfiles import finders
 #Chapter 5
 from rango.models import Page, Category
 import populate_rango
-from . import test_utils
+import test_utils
 
 #Chapter 6
-from .decorators import chapter6
+from rango.decorators import chapter6
 
 #Chapter 7
-from .decorators import chapter7
+from rango.decorators import chapter7
 from rango.forms import CategoryForm, PageForm
 
 #Chapter 8
 from django.template import loader
 from django.conf import settings
-from .decorators import chapter8
+from rango.decorators import chapter8
 import os.path
 
 #Chapter 9
@@ -31,7 +30,7 @@ from rango.models import User, UserProfile
 from rango.forms import UserForm, UserProfileForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.storage import default_storage
-from .decorators import chapter9
+from rango.decorators import chapter9
 
 #Chapter 10
 from datetime import datetime, timedelta
@@ -84,7 +83,7 @@ class Chapter10ViewTests(TestCase):
                 return False
 
         # Check it contains visits message
-        self.assertIn('visits: 1'.lower().encode(), response.content.lower())
+        self.assertIn('visits: 1'.lower(), response.content.lower())
 
     def test_about_page_shows_number_of_visits(self):
         #Access index page to count one visit
@@ -106,7 +105,7 @@ class Chapter10ViewTests(TestCase):
                 return False
 
         # Check it contains visits message
-        self.assertIn('visits: 1'.lower().encode(), response.content.lower())
+        self.assertIn('visits: 1'.lower(), response.content.lower())
 
     def test_visit_number_is_passed_via_context(self):
         #Access index

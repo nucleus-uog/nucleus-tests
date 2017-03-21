@@ -19,7 +19,7 @@ class NucleusRunner(DiscoverRunner):
         # they are run.
         self.original_suite = deepcopy(suite)
 
-        result = super().run_suite(suite, **kwargs)
+        result = super(NucleusRunner, self).run_suite(suite, **kwargs)
         self.output_results(result)
         return result
 
@@ -60,7 +60,7 @@ class NucleusRunner(DiscoverRunner):
 
                 with open(error_filepath, 'w+') as f:
                     f.write(log)
-                
+
                 results[str(test)].update({
                     'passed': False,
                     'error': error_filename
@@ -84,4 +84,4 @@ class NucleusRunner(DiscoverRunner):
             os.mkdir(path)
 
     def strclass(self, cls):
-        return '{}.{}'.format(cls.__module__, cls.__qualname__)
+        return '{}.{}'.format(cls.__module__, cls.__name__)

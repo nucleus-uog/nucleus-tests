@@ -10,13 +10,13 @@ from django.contrib.staticfiles import finders
 #Chapter 5
 from rango.models import Page, Category
 import populate_rango
-from . import test_utils
+import test_utils
 
 #Chapter 6
-from .decorators import chapter6
+from rango.decorators import chapter6
 
 #Chapter 7
-from .decorators import chapter7
+from rango.decorators import chapter7
 from rango.forms import CategoryForm, PageForm
 
 # ===== Chapter 7

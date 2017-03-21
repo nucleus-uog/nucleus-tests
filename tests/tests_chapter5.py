@@ -10,7 +10,7 @@ from django.contrib.staticfiles import finders
 #Chapter 5
 from rango.models import Page, Category
 import populate_rango
-from . import test_utils
+import test_utils
 
 # ===== CHAPTER 5
 class Chapter5ModelTests(TestCase):

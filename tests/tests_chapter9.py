@@ -1,4 +1,3 @@
-from __future__ import print_function
 # Chapter 3
 from django.test import TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -11,19 +10,19 @@ from django.contrib.staticfiles import finders
 #Chapter 5
 from rango.models import Page, Category
 import populate_rango
-from . import test_utils
+import test_utils
 
 #Chapter 6
-from .decorators import chapter6
+from rango.decorators import chapter6
 
 #Chapter 7
-from .decorators import chapter7
+from rango.decorators import chapter7
 from rango.forms import CategoryForm, PageForm
 
 #Chapter 8
 from django.template import loader
 from django.conf import settings
-from .decorators import chapter8
+from rango.decorators import chapter8
 import os.path
 
 #Chapter 9
@@ -31,7 +30,7 @@ from rango.models import User, UserProfile
 from rango.forms import UserForm, UserProfileForm
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files.storage import default_storage
-from .decorators import chapter9
+from rango.decorators import chapter9
 
 # ===== Chapter 9
 class Chapter9ModelTests(TestCase):
@@ -65,7 +64,7 @@ class Chapter9ViewTests(TestCase):
 
         # Check if form is rendered correctly
         # self.assertIn('<h1>Register with Rango</h1>', response.content)
-        self.assertIn(b'<strong>register here!</strong><br />'.lower(), response.content.lower())
+        self.assertIn('<strong>register here!</strong><br />'.lower(), response.content.lower())
 
         # Check form in response context is instance of UserForm
         self.assertTrue(isinstance(response.context['user_form'], UserForm))
@@ -81,7 +80,7 @@ class Chapter9ViewTests(TestCase):
         self.assertEquals(response.context['profile_form'].as_p(), profile_form.as_p())
 
         # Check submit button
-        self.assertIn(b'type="submit" name="submit" value="Register"', response.content)
+        self.assertIn('type="submit" name="submit" value="Register"', response.content)
 
     @chapter9
     def test_login_form_is_displayed_correctly(self):
@@ -96,18 +95,44 @@ class Chapter9ViewTests(TestCase):
 
         #Check form display
         #Header
-        self.assertIn(b'<h1>Login to Rango</h1>'.lower(), response.content.lower())
+        self.assertIn('<h1>Login to Rango</h1>'.lower(), response.content.lower())
 
         #Username label and input text
-        self.assertIn(b'Username:', response.content)
-        self.assertIn(b'input id="id_username" maxlength="50" name="username" type="text" required', response.content)
+        self.assertIn('Username:', response.content)
+        self.assertIn('input type="text" name="username" value="" size="50"', response.content)
 
         #Password label and input text
-        self.assertIn(b'Password:', response.content)
-        self.assertIn(b'input id="id_password" name="password" type="password" required', response.content)
+        self.assertIn('Password:', response.content)
+        self.assertIn('input type="password" name="password" value="" size="50"', response.content)
 
         #Submit button
-        self.assertIn(b'input type="submit" value="submit"', response.content)
+        self.assertIn('input type="submit" value="submit"', response.content)
+
+    @chapter9
+    def test_login_form_is_displayed_correctly(self):
+        #Access login page
+        try:
+            response = self.client.get(reverse('login'))
+        except:
+            try:
+                response = self.client.get(reverse('rango:login'))
+            except:
+                return False
+
+        #Check form display
+        #Header
+        self.assertIn('<h1>Login to Rango</h1>'.lower(), response.content.lower())
+
+        #Username label and input text
+        self.assertIn('Username:', response.content)
+        self.assertIn('input type="text" name="username" value="" size="50"', response.content)
+
+        #Password label and input text
+        self.assertIn('Password:', response.content)
+        self.assertIn('input type="password" name="password" value="" size="50"', response.content)
+
+        #Submit button
+        self.assertIn('input type="submit" value="submit"', response.content)
 
     @chapter9
     def test_login_provides_error_message(self):
@@ -120,10 +145,11 @@ class Chapter9ViewTests(TestCase):
             except:
                 return False
 
+        print response.content
         try:
-            self.assertIn(b'wronguser', response.content)
+            self.assertIn('wronguser', response.content)
         except:
-            self.assertIn(b'Invalid login details supplied.', response.content)
+            self.assertIn('Invalid login details supplied.', response.content)
 
     @chapter9
     def test_login_redirects_to_index(self):
@@ -163,7 +189,7 @@ class Chapter9ViewTests(TestCase):
                 return False
 
         # Check user was successfully registered
-        self.assertIn(b'thank you for registering!'.lower(), response.content.lower())
+        self.assertIn('thank you for registering!'.lower(), response.content.lower())
         user = User.objects.get(username='testuser')
         user_profile = UserProfile.objects.get(user=user)
         path_to_image = './media/profile_images/testuser.jpg'
