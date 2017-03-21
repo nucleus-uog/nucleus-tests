@@ -58,7 +58,7 @@ else
 fi
 
 # Run testing script.
-printf "\n"
+printf "\n:: Running tests..."
 export DJANGO_SETTINGS_MODULE=tango_with_django_project.test_settings
 export ROOT=$ROOT
-python $ROOT/manage.py test $ROOT/rango/
+python $ROOT/manage.py test $ROOT/rango/nucleus_tests/
